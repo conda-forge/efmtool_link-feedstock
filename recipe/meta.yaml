@@ -11,19 +11,19 @@ source:
 
 build:
   noarch: python
-  number: 0  # NOTE: increment for new build/set to zero for new version
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
     - setuptools
-    - python >=3.7,<3.11
+    - python {{ python_min }}
     - jpype1
     - openjdk
     - install-jdk
   run:
-    - python >=3.7,<3.11
+    - python >={{ python_min }},<3.11
     - numpy
     - jpype1
     - cobra >=0.26.3
@@ -36,6 +36,7 @@ test:
     - efmtool_link
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
